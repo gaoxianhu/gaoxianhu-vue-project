@@ -74,11 +74,23 @@
         //   })
         // }
         //对象写法2：
+        // this.$router.push({
+        //   name: 'search',
+        //   params: { keyword: keyword === '' ? undefined : keyword },
+        //   query: { keyword2: keyword.toUpperCase() }
+        // })
+
+        // this.$router.replace({ //push重写后的方法
+        //   name: 'search',
+        //   params: { keyword: keyword === '' ? undefined : keyword },
+        //   query: { keyword2: keyword.toUpperCase() }
+        // })
+
         this.$router.push({
           name: 'search',
           params: { keyword: keyword === '' ? undefined : keyword },
           query: { keyword2: keyword.toUpperCase() }
-        })
+        }).then(() => {console.log('跳转成功的回调执行')})
       }
     }
   }
