@@ -61,17 +61,24 @@
         //   this.$router.push(`/search/${keyword}?keyword2=${keyword.toUpperCase()}`)
         // }
         //对象模式
-        if(keyword === ''){
-          this.$router.push({
-            name: 'search'
-          })
-        }else{
-          this.$router.push({
-            name: 'search',
-            params: { keyword: this.keyword },
-            query: { keyword2: this.keyword.toUpperCase() }
-          })
-        }
+        //对象写法1：
+        // if(keyword === ''){
+        //   this.$router.push({
+        //     name: 'search'
+        //   })
+        // }else{
+        //   this.$router.push({
+        //     name: 'search',
+        //     params: { keyword: this.keyword },
+        //     query: { keyword2: this.keyword.toUpperCase() }
+        //   })
+        // }
+        //对象写法2：
+        this.$router.push({
+          name: 'search',
+          params: { keyword: keyword === '' ? undefined : keyword },
+          query: { keyword2: keyword.toUpperCase() }
+        })
       }
     }
   }
