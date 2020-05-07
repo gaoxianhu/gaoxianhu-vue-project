@@ -12,24 +12,24 @@ export default [
     component: Home
   },
   {
-    name: 'search',
+    name: 'search',  // 是当前路由的标识名称
     path: '/search/:keyword?',
     component: Search,
-    //将params参数和query参数映射成属性传入路由组件
+    // 将params参数和query参数映射成属性传入路由组件
     props: route => ({keyword3: route.params.keyword, keyword4: route.query.keyword2})
   },
   {
     path: '/register',
     component: Register,
     meta: {
-      isHidFooter: true
+      isHideFooter: true
     }
   },
   {
     path: '/login',
     component: Login,
     meta: {
-      isHidFooter: true
+      isHideFooter: true
     }
   },
 ]

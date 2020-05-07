@@ -1,5 +1,4 @@
 <template>
-  <!-- 头部 -->
   <header class="header">
     <!-- 头部的第一行 -->
     <div class="top">
@@ -34,63 +33,42 @@
       <div class="searchArea">
         <form action="###" class="searchForm">
           <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword"/>
-          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="search">搜索</button>
+          <button class="sui-btn btn-xlarge btn-danger" @click.prevent="search">搜索</button>
         </form>
       </div>
     </div>
   </header>
 </template>
 
+
 <script>
   export default {
     name: 'Header',
+
     data () {
       return {
         keyword: 'atguigu'
       }
     },
+
     methods: {
-      search(){
-        //编程式路由导航(跳转)
-        //字符串模式
-        // this.$router.push(`/search/${this.keyword}?keyword2=${this.keyword.toUpperCase()}`)
-        const keyword = this.keyword;
-        // if(keyword === ''){
-        //   this.$router.push('/search')
-        // }else{
-        //   this.$router.push(`/search/${keyword}?keyword2=${keyword.toUpperCase()}`)
-        // }
-        //对象模式
-        //对象写法1：
-        // if(keyword === ''){
-        //   this.$router.push({
-        //     name: 'search'
-        //   })
-        // }else{
-        //   this.$router.push({
-        //     name: 'search',
-        //     params: { keyword: this.keyword },
-        //     query: { keyword2: this.keyword.toUpperCase() }
-        //   })
-        // }
-        //对象写法2：
-        // this.$router.push({
-        //   name: 'search',
-        //   params: { keyword: keyword === '' ? undefined : keyword },
-        //   query: { keyword2: keyword.toUpperCase() }
-        // })
+      search () {
+        const keyword = this.keyword
 
-        // this.$router.replace({ //push重写后的方法
-        //   name: 'search',
-        //   params: { keyword: keyword === '' ? undefined : keyword },
-        //   query: { keyword2: keyword.toUpperCase() }
-        // })
+        const location = { // push是重写后的方法
+          name: 'search', 
+        }
+        // 如果keyword有值, 指定params
+        if (keyword) {
+          location.params = {keyword}
+        }
 
-        this.$router.push({
-          name: 'search',
-          params: { keyword: keyword === '' ? undefined : keyword },
-          query: { keyword2: keyword.toUpperCase() }
-        }).then(() => {console.log('跳转成功的回调执行')})
+        // 同时还要携带当前原本的query
+        const {query} = this.$route
+        location.query = query
+
+        // 跳转到Search
+        this.$router.push(location)
       }
     }
   }
